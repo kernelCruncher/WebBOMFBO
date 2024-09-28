@@ -77,8 +77,7 @@ def generate_batch_indices(sampleSpaceName, initialSize=5, batch_size=5):
           _, _, _, index_store,_ = setUpInitialData(sampleSpaceName, initialSize, file=False)
           batch_index_store.append(index_store)
       return batch_index_store
-     
-     
+          
 # Required when we want to ensure that the sf has the same hf points in its intitial sampel as the mf case.
 def convertMFDatatoSFData(sampleSpace, indexStore):
       sampleSpace_hf = sampleSpace[np.where(sampleSpace[:, -2]==1)]
@@ -120,4 +119,3 @@ def compute_correlation(domain):
       hf_points = np.where(domain[:, -2] == 1)
       lf_points = np.where(domain[:, -2] != 1)
       return np.corrcoef(domain[hf_points, -1], domain[lf_points, -1])[0,1]
-
