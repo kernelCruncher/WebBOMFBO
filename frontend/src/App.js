@@ -1,5 +1,3 @@
-// Filename - App.js
-
 // Importing modules
 import React, { useState, useEffect } from "react";
 import "./App.css";
@@ -34,14 +32,16 @@ function App() {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<h1>Multi-fidelity Bayesian Optimization</h1>
-				{/* Calling a data from setdata for showing */}
-				<p>{data.name}</p>
+				<h3>Multi-fidelity Bayesian Optimization</h3>
+			</header>
+			{/* <p>{data.name}</p>
 				<p>{data.age}</p>
 				<p>{data.date}</p>
-				<p>{data.programming}</p>
-
-			</header>
+				<p>{data.programming}</p> */}
+			<form method="POST" action="/upload" encType="multipart/form-data">
+      			<p><input type="file" name="file"></input></p>
+      			<p><input type="submit" value="Submit"></input></p>
+    		</form>
 		</div>
 	);
 }
