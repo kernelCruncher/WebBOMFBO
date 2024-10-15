@@ -3,45 +3,34 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-	// usestate for setting a javascript
-	// object for storing and using data
-	const [data, setdata] = useState({
-		name: "",
-		age: 0,
-		date: "",
-		programming: "",
-	});
-
+	const [data, setData] = useState([]);
 	// Using useEffect for single rendering
 	useEffect(() => {
-		// Using fetch to fetch the api from 
-		// flask server it will be redirected to proxy
-		fetch("/data").then((res) =>
-			res.json().then((data) => {
-				// Setting a data from api
-				setdata({
-					name: data.Name,
-					age: data.Age,
-					date: data.Date,
-					programming: data.programming,
-				});
-			})
-		);
-	}, []);
+		fetch('/uploads').then(res => res.json()).then(data => {
+			console.log(data)
+			setData(data);
+		});
+	  }, []);
 
 	return (
 		<div className="App">
 			<header className="App-header">
 				<h3>Multi-fidelity Bayesian Optimization</h3>
 			</header>
-			{/* <p>{data.name}</p>
-				<p>{data.age}</p>
-				<p>{data.date}</p>
-				<p>{data.programming}</p> */}
+			<div>I am hungry. Give me some files!</div>	
 			<form method="POST" action="/upload" encType="multipart/form-data">
       			<p><input type="file" name="file"></input></p>
       			<p><input type="submit" value="Submit"></input></p>
     		</form>
+			{
+						data.map(function(item, i) {
+						  return(
+							<div key={i}>
+							  <span>{item}</span>
+							</div>
+						 )
+})
+			}
 		</div>
 	);
 }

@@ -3,7 +3,7 @@ import sys
 from flask import Flask
 import datetime
 import os
-from flask import Flask, render_template, request, redirect, url_for, abort
+from flask import Flask, render_template, request, redirect, url_for, abort, send_from_directory
 from werkzeug.utils import secure_filename
 
 x = datetime.datetime.now()
@@ -24,6 +24,11 @@ def get_time():
         "Date":x, 
         "programming":"python"
         }
+
+@app.route('/uploads')
+def get_uploads():
+    files = os.listdir(app.config["UPLOAD_PATH"])
+    return files
  
 @app.route('/')
 def index():
