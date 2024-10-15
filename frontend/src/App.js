@@ -23,13 +23,14 @@ function App() {
       			<p><input type="submit" value="Submit"></input></p>
     		</form>
 			{
-						data.map(function(item, i) {
+				<select>
+					{data.map(function(item) {
 						  return(
-							<div key={i}>
-							  <span>{item}</span>
-							</div>
+						<option value={item}>{item}</option>
 						 )
-})
+						})}
+			  </select>
+						
 			}
 		</div>
 	);
