@@ -38,9 +38,21 @@ def upload_files():
         if file_ext not in app.config['UPLOAD_EXTENSIONS']:
             abort(400)
         # print('EJ', workingDirectory, flush=True)
-        os.mkdir(app.config["UPLOAD_PATH"], mode=0o777,)
-        uploaded_file.save(os.path.join(app.config["UPLOAD_PATH"], filename))
+        os.makedirs(app.config["UPLOAD_PATH"], mode=0o777, exist_ok=True)
+        filePath = os.path.join(app.config["UPLOAD_PATH"], filename)
+        filePathNumbered = uniquify(filePath)
+        uploaded_file.save(filePathNumbered)
     return redirect(url_for('index'))
+
+def uniquify(path):
+    filename, extension = os.path.splitext(path)
+    counter = 1
+
+    while os.path.exists(path):
+        path = filename + "(" + str(counter) + ")" + extension
+        counter += 1
+
+    return path
 
 # Running app
 if __name__ == '__main__':
