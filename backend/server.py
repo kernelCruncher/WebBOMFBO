@@ -1,29 +1,13 @@
- # Import flask and datetime module for showing date and time
-import sys
 from flask import Flask
-import datetime
 import os
 from flask import Flask, render_template, request, redirect, url_for, abort, send_from_directory
 from werkzeug.utils import secure_filename
-
-x = datetime.datetime.now()
  
 # Initializing flask app
 app = Flask(__name__)
 
 app.config["UPLOAD_PATH"]="uploads"
 app.config['UPLOAD_EXTENSIONS']=['.csv', '.txt']
-
-# Route for seeing a data
-@app.route('/data')
-def get_time():
-    # Returning an api for showing in  reactjs
-    return {
-        'Name':"geek", 
-        "Age":"22",
-        "Date":x, 
-        "programming":"python"
-        }
 
 @app.route('/uploads')
 def get_uploads():
@@ -48,6 +32,14 @@ def upload_files():
         filePathNumbered = uniquify(filePath)
         uploaded_file.save(filePathNumbered)
     return redirect(url_for('index'))
+
+@app.route('/optimize', methods=['POST'])
+def optimize():
+    fileName =request.form['file']
+    budget=request.form['budget']
+    acquisitionFunction =request.form['acquisition']
+    # MFBO code should go here.
+    return [0]
 
 def uniquify(path):
     filename, extension = os.path.splitext(path)
