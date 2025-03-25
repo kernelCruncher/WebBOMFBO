@@ -1,4 +1,4 @@
-# WebBOMFBO
+# WebBOMFBO (WIP)
 A prototype combining MFBO within the WebBO framework.
 
 To run the python server run the following command: 
